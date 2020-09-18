@@ -1,0 +1,177 @@
+[
+    {
+        "id":"1",
+        "name":"Scooby and Shaggy",
+        "img":"",
+        "attacks":[
+            {
+                "attack_name":"Zoinks",
+                "attack_desc":"Frightens the opponent",
+                "attack_damage":"30",
+                "attack_message":"You got spooked by hippie and a dog, losing 30hp",
+                "attack_cooldown":"2"
+            },
+            {
+                "attack_name":"Snack attack",
+                "attack_desc":"Throws snacks at the opponent",
+                "attack_damage":"10",
+                "attack_message":"You stopped to eat the scooby snacks, lost 10hp",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Unmask the ghost",
+                "attack_desc":"Unmasks the ghost, forcing the opponent to avoid attacking the now revealed human",
+                "attack_damage":"20",
+                "attack_message":"You got side tracked by the gang,lose 20hp to avoid attacking the 'ghost'",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Clues",
+                "attack_desc":"Distracts the opponent with dumb clues",
+                "attack_damage":"10",
+                "attack_message":"You got distracted by the dumb clues left by the gang,losing 10hp",
+                "attack_cooldown":"1"
+            }
+        ]
+    },
+    {
+        "id":"2",
+        "name":"Joker",
+        "img":"",
+        "attacks":[
+            {
+                "attack_name":"HAHAHA",
+                "attack_desc":"Laughs the opponent into self-doubt",
+                "attack_damage":"10",
+                "attack_message":"You got self-concious by the joker's laugh, making you lose 10hp",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Chaos creater",
+                "attack_desc":"Create chaos to confuse the opponent",
+                "attack_damage":"30",
+                "attack_message":"You lost sight of the opponent in the chaos, losing 30hp",
+                "attack_cooldown":"2"
+            },
+            {
+                "attack_name":"Pysic influence",
+                "attack_desc":"Manipulate the opponent with talks of anarchy",
+                "attack_damage":"10",
+                "attack_message":"You just lured into talks of betrayal and anarchy, losing 10hp",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"POW",
+                "attack_desc":"Fire the harpoon gun,which imaplaes the foes on impact",
+                "attack_damage":"40",
+                "attack_message":"You just got shot with the Joker's signature gun, losing 40hp",
+                "attack_cooldown":"2"
+            }            
+        ]
+    },
+    {
+        "id":"3",
+        "name":"Ironman",
+        "img":"",
+        "attacks":[
+            {
+                "attack_name":"Called out",
+                "attack_desc":"Call out the opponent for playing galaga",
+                "attack_damage":"10",
+                "attack_message":"You just got called out for playing galaga at work, losing 10hp",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Jarvis attack",
+                "attack_desc":"Jarvis exposes the opponents weakness",
+                "attack_damage":"30",
+                "attack_message":"Jarvis analyzed your weaknesses, making the attack more powerful. You lost 30hp.",
+                "attack_cooldown":"2"
+            },
+            {
+                "attack_name":"Repulsar blasts",
+                "attack_desc":"Shoot concentrated beams of negatively charged muons",
+                "attack_damage":"40",
+                "attack_message":"You just got blasted by the beams,losing 40hp",
+                "attack_cooldown":"2"
+            },
+            {
+                "attack_name":"Sass it up",
+                "attack_desc":"Arrogantly sass the opponent",
+                "attack_damage":"10",
+                "attack_message":"You just got sassed, losing your self-confidence and 10hp",
+                "attack_cooldown":"1"
+            }            
+        ]
+    },
+    {
+        "id":"4",
+        "name":"Elsa",
+        "img":"",
+        "attacks":[
+            {
+                "attack_name":"Let it go",
+                "attack_desc":"Sings 'Let it go' on repeat",
+                "attack_damage":"20",
+                "attack_message":"You just lost 20hp listening to Elsa sing 'Let it go'",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Ignore",
+                "attack_desc":"Ignore the opponent for upto 10 years",
+                "attack_damage":"30",
+                "attack_message":"You just got locked out of the fight, losing 30hp",
+                "attack_cooldown":"2"
+            },
+            {
+                "attack_name":"Snowblast",
+                "attack_desc":"Throw olaf at the opponent",
+                "attack_damage":"10",
+                "attack_message":"The cute talking snowman distracted you,making you lose 10hp",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Truth attack",
+                "attack_desc":"Force opponent to listen to the fact that you can't marry someone after knowing them for a day.",
+                "attack_damage":"10",
+                "attack_message":"You got a lecture about how you can't marry said man after knowing him for a day,losing 10hp",
+                "attack_cooldown":"1"
+            }            
+        ]
+    },
+    {
+        "id":"5",
+        "name":"Team Rocket",
+        "img":"",
+        "attacks":[
+            {
+                "attack_name":"",
+                "attack_desc":"",
+                "attack_damage":"",
+                "attack_message":"",
+                "attack_cooldown":""
+            },
+            {
+                "attack_name":"",
+                "attack_desc":"",
+                "attack_damage":"",
+                "attack_message":"",
+                "attack_cooldown":""
+            },
+            {
+                "attack_name":"",
+                "attack_desc":"",
+                "attack_damage":"",
+                "attack_message":"",
+                "attack_cooldown":""
+            },
+            {
+                "attack_name":"",
+                "attack_desc":"",
+                "attack_damage":"",
+                "attack_message":"",
+                "attack_cooldown":""
+            }            
+        ]
+    }
+]
