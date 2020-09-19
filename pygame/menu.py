@@ -5,13 +5,11 @@ import json
 from pygame.locals import *
 from game import Game
 from write_text import write_text
+from random import randint
 
 mainClock = pygame.time.Clock()
 
-pygame.init()
-pygame.display.set_caption('Squabble')
-screen = pygame.display.set_mode((800, 600),0,32)
-font = pygame.font.SysFont(None, 42)
+
 
 with open('characters.json') as info:
     data = json.load(info)
@@ -19,6 +17,10 @@ with open('characters.json') as info:
 
 def main_menu():
     while True:
+        pygame.init()
+        pygame.display.set_caption('Squabble')
+        screen = pygame.display.set_mode((800, 600),0,32)
+        font = pygame.font.SysFont(None, 42)
         screen.fill((0,0,0))
         write_text('Select a character to start playing!', font, (255, 255, 255), screen,400,50)
         button=[]
@@ -41,7 +43,9 @@ def main_menu():
                         character=data[button.index(rect)]['name']
                         character_id=data[button.index(rect)]['id']
                         running=False
-                        game_obj=Game(character,character_id,"Ironman",2)
+                        player2_id=randint(0,4)
+                        player2=data[player2_id]['name']
+                        game_obj=Game(character,character_id,player2,player2_id)
                         game_obj.play()
 
         pygame.display.update()

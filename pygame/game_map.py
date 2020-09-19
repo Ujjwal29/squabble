@@ -14,6 +14,9 @@ house2 = pygame.transform.scale(house2, (100, 164))
 house3=pygame.image.load("images/house3.png")
 house3 = pygame.transform.scale(house3, (150, 100))
 char=pygame.image.load('images/volleyball.png')
+from menu import main_menu
+
+
 class Wall(pygame.sprite.Sprite):
     """This class represents the bar at the bottom that the player controls """
  
@@ -211,11 +214,16 @@ def main():
         
         player.move(current_room.wall_list)
  
-        if player.rect.x < -2:
-            print("hello")
+        if player.rect.x < 40:
+            done=False
+            print('hello')
+            main_menu()
+
  
-        if player.rect.x > 780:
+        if player.rect.x > 700:
+            done=False
             print("Bye")
+            main_menu()
             
  
             
@@ -231,8 +239,7 @@ def main():
         
         clock.tick(60)
         
-    pygame.quit()
  
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
 

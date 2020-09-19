@@ -185,7 +185,7 @@ class Game:
                     self.update_player1()                   
                     flag=2
                     pygame.display.update()
-                    pygame.time.wait(5000)
+                    pygame.time.wait(2000)
 
                 if(flag==2):
                     self.attack=self.data[int(self.player2_id)]['attacks'][0]['attack_name']
