@@ -40,8 +40,7 @@ def start():
                         if(button.index(rect)==0):
                             main()
                         else:
-                            wip()
-
+                            main()
         pygame.display.update()
         mainClock.tick(60)
 

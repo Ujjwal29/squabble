@@ -1,5 +1,12 @@
 import pygame
- 
+import sys
+import time
+import json
+from pygame.locals import *
+from game_map import game_map
+from write_text import write_text
+from wip import wip
+
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -14,7 +21,6 @@ house2 = pygame.transform.scale(house2, (100, 164))
 house3=pygame.image.load("images/house3.png")
 house3 = pygame.transform.scale(house3, (150, 100))
 char=pygame.image.load('images/volleyball.png')
-from menu import main_menu
 
 
 class Wall(pygame.sprite.Sprite):
@@ -93,11 +99,9 @@ class Player(pygame.sprite.Sprite):
                 self.rect.top = block.rect.bottom
         
             else:
-                self.rect.bottom = block.rect.top
+                self.rect.bottom = block.rect.top         
                 
-                
- 
- 
+
 class Map(object):
     """ Base class for all rooms. """
  
@@ -142,104 +146,124 @@ class Map1(Map):
         for item in walls:
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
- 
+           
 
-'''class Training(Map1):
+class Game_client:
+
     def __init__(self):
-        super().__init__()
-        def train(self,walls):
-            block_hit_list = pygame.sprite.spritecollide(self, walls, False)
-            for i in block_hit_list:
-                if i[4]==BLUE:
-                    print("Hello")'''        
-            
-def game_map():
-    """ Main Program """
- 
-    # Call this function so the Pygame library can initialize itself
-    pygame.init()
+        self.mainClock = pygame.time.Clock()
+        pygame.init()
+        pygame.display.set_caption('Squabble')
+        self.screen = pygame.display.set_mode((800, 600),0,32)
+        self.font = pygame.font.SysFont(None, 42)
+        self.font_sm=pygame.font.SysFont(None,30)
+        self.font_xs=pygame.font.SysFont(None,16)
+        self.font_info=pygame.font.SysFont(None,24)
+        self.screen.fill((0,0,0))
+        # self.game_map=game_map()
+
+    def game_map(self):
+        player = Player(100, 100)
+        movingsprites = pygame.sprite.Group()
+        movingsprites.add(player)
     
-    # Create an 800x600 sized screen
-    screen = pygame.display.set_mode([800, 600])
- 
-    # Set the title of the window
-    pygame.display.set_caption('Squabble')
- 
-    # Create the player paddle object
-    player = Player(100, 100)
-    movingsprites = pygame.sprite.Group()
-    movingsprites.add(player)
- 
-    maps = []
- 
-    room = Map1()
-    maps.append(room)
- 
-    current_room_no = 0
-    current_room = maps[current_room_no]
- 
-    clock = pygame.time.Clock()
- 
-    done = False
- 
-    while not done:
- 
-        # --- Event Processing ---
- 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                done = True
- 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                    player.changespeed(-3, 0)
-                if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                    player.changespeed(3, 0)
-                if event.key == pygame.K_UP or event.key == pygame.K_w:
-                    player.changespeed(0, -3)
-                if event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                    player.changespeed(0, 3)
- 
-            if event.type == pygame.KEYUP:
-                if event.key == pygame.K_LEFT or event.key == pygame.K_a:
-                    player.changespeed(3, 0)
-                if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
-                    player.changespeed(-3, 0)
-                if event.key == pygame.K_UP or event.key == pygame.K_w:
-                    player.changespeed(0, 3)
-                if event.key == pygame.K_DOWN or event.key == pygame.K_s:
-                    player.changespeed(0, -3)
- 
-        # --- Game Logic ---
-        
-        player.move(current_room.wall_list)
- 
-        if player.rect.x < 40:
-            done=False
-            print('hello')
-            main_menu()
-
- 
-        if player.rect.x > 700:
-            done=False
-            print("Bye")
-            main_menu()
+        maps = []
+    
+        room = Map1()
+        maps.append(room)
+    
+        current_room_no = 0
+        current_room = maps[current_room_no]
+    
+        clock = pygame.time.Clock()
+    
+        done = False
+    
+        while not done:
+    
+            # --- Event Processing ---  
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    done = True
+    
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                        player.changespeed(-3, 0)
+                    if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+                        player.changespeed(3, 0)
+                    if event.key == pygame.K_UP or event.key == pygame.K_w:
+                        player.changespeed(0, -3)
+                    if event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                        player.changespeed(0, 3)
+    
+                if event.type == pygame.KEYUP:
+                    if event.key == pygame.K_LEFT or event.key == pygame.K_a:
+                        player.changespeed(3, 0)
+                    if event.key == pygame.K_RIGHT or event.key == pygame.K_d:
+                        player.changespeed(-3, 0)
+                    if event.key == pygame.K_UP or event.key == pygame.K_w:
+                        player.changespeed(0, 3)
+                    if event.key == pygame.K_DOWN or event.key == pygame.K_s:
+                        player.changespeed(0, -3)
+    
+            # --- Game Logic ---          
+            player.move(current_room.wall_list)
+    
+            if player.rect.x < 40:
+                done=False
+                print('hello')             
+    
+            if player.rect.x > 700:
+                done=False
+                print("Bye")
             
- 
+            # --- Drawing ---
+            self.screen.fill(BLACK)
+            current_room.wall_list.draw(self.screen)
+            self.screen.blit(background,(0,0))
+            self.screen.blit(house1,(0,-20))
+            self.screen.blit(house2,(0,360))
+            self.screen.blit(house3,(650,0))
+            movingsprites.draw(self.screen)
+            pygame.display.flip()
             
-        # --- Drawing ---
-        screen.fill(BLACK)
-        current_room.wall_list.draw(screen)
-        screen.blit(background,(0,0))
-        screen.blit(house1,(0,-20))
-        screen.blit(house2,(0,360))
-        screen.blit(house3,(650,0))
-        movingsprites.draw(screen)
-        pygame.display.flip()
-        
-        clock.tick(60)
-        
- 
-# if __name__ == "__main__":
-#     main()
+            clock.tick(60)
 
+    def start(self):
+        while True:
+            button=[]
+            btn=pygame.Rect(220, 200, 360, 50)
+            button.append(btn)
+            pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            write_text('Play against computer', self.font, (0, 0, 0), self.screen, 400, 225)
+            btn=pygame.Rect(220, 290, 360, 50)
+            button.append(btn)
+            pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            write_text('Play online (Multiplayer)', self.font, (0, 0, 0), self.screen, 400, 315)
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                mouse_pos = pygame.mouse.get_pos()
+                for i, rect in enumerate(button):
+                    if rect.collidepoint(mouse_pos):                  
+                        if event.type == MOUSEBUTTONDOWN:
+                            print("playy!!")
+                            running=False
+                            if(button.index(rect)==0):
+                                return 1
+            pygame.display.update()
+            self.mainClock.tick(60)
+
+    def game_loop(self):
+        running=True
+        x=0
+        while(running):
+            if(self.start()):
+                self.game_map()
+
+
+
+obj=Game_client()
+obj.game_loop()
