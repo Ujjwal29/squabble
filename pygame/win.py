@@ -5,6 +5,7 @@ import json
 from pygame.locals import *
 from write_text import write_text
 
+
 mainClock = pygame.time.Clock()
 
 pygame.init()
@@ -12,7 +13,7 @@ pygame.display.set_caption('Squabble')
 screen = pygame.display.set_mode((800, 600),0,32)
 font = pygame.font.SysFont(None, 42)
 
-def win(winner,loser):
+def win(winner):
     while True:
         screen.fill((0,0,0))
         s=winner+" won!!"
@@ -25,14 +26,11 @@ def win(winner,loser):
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
             mouse_pos = pygame.mouse.get_pos()
             if btn.collidepoint(mouse_pos):                  
                 if event.type == MOUSEBUTTONDOWN:
                     print("click")
+                    
 
         pygame.display.update()
         mainClock.tick(60)

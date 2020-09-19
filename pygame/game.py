@@ -91,12 +91,10 @@ class Game:
         
         if(self.life2==0):
             print('player 1 wins!')
-            self.lose=self.player2
-            self.win=self.player1
+            self.win=self.player2
         if(self.life1==0):
             print('player 2 wins')
-            self.lose=self.player1
-            self.win=self.player2
+            self.win=self.player1
         bar=pygame.Rect(rect_margin, 39.5,width, 4.5)
         pygame.draw.rect(self.screen, (0, 255, 0),bar)
 
@@ -172,9 +170,6 @@ class Game:
                 if event.type == QUIT:
                     pygame.quit()
                     sys.exit()
-                if event.type == KEYDOWN:
-                    if event.key == K_ESCAPE:
-                        running = False
                 temp=0
                 mouse_pos = pygame.mouse.get_pos()
                 for i, rect in enumerate(self.button):  
@@ -200,8 +195,9 @@ class Game:
                     self.update_player2()
                     flag=0
 
-                if(self.win or self.lose):
-                    win(self.win,self.lose)
+                if(self.win):
+                    running=False
+                    win(self.win)
                     print(self.won,'is the winner')
                     break
 

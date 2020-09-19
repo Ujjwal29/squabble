@@ -25,14 +25,11 @@ def start():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
             mouse_pos = pygame.mouse.get_pos()
             if btn.collidepoint(mouse_pos):                  
                 if event.type == MOUSEBUTTONDOWN:
                     print("click")
+                    running=False
                     main_menu()
 
         pygame.display.update()

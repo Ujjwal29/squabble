@@ -33,10 +33,6 @@ def main_menu():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
             mouse_pos = pygame.mouse.get_pos()
             for i, rect in enumerate(button):
                 if rect.collidepoint(mouse_pos):                  
@@ -44,6 +40,7 @@ def main_menu():
                         print(data[button.index(rect)]['name'],"selected!!")
                         character=data[button.index(rect)]['name']
                         character_id=data[button.index(rect)]['id']
+                        running=False
                         game_obj=Game(character,character_id,"Ironman",2)
                         game_obj.play()
 
