@@ -1,6 +1,6 @@
 [
     {
-        "id":"1",
+        "id":"0",
         "name":"Scooby and Shaggy",
         "img":"",
         "attacks":[
@@ -35,7 +35,7 @@
         ]
     },
     {
-        "id":"2",
+        "id":"1",
         "name":"Joker",
         "img":"",
         "attacks":[
@@ -70,7 +70,7 @@
         ]
     },
     {
-        "id":"3",
+        "id":"2",
         "name":"Ironman",
         "img":"",
         "attacks":[
@@ -105,7 +105,7 @@
         ]
     },
     {
-        "id":"4",
+        "id":"3",
         "name":"Elsa",
         "img":"",
         "attacks":[
@@ -140,7 +140,7 @@
         ]
     },
     {
-        "id":"5",
+        "id":"4",
         "name":"Team Rocket",
         "img":"",
         "attacks":[
