@@ -145,7 +145,7 @@ class Map1(Map):
  
       
             
-def main():
+def game_map():
     """ Main Program """
  
     # Call this function so the Pygame library can initialize itself

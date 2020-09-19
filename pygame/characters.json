@@ -2,7 +2,7 @@
     {
         "id":"0",
         "name":"Scooby and Shaggy",
-        "img":"",
+        "img":"images/scooby.png",
         "attacks":[
             {
                 "attack_name":"Zoinks",
@@ -37,7 +37,7 @@
     {
         "id":"1",
         "name":"Joker",
-        "img":"",
+        "img":"images/joker.png",
         "attacks":[
             {
                 "attack_name":"HAHAHA",
@@ -72,7 +72,7 @@
     {
         "id":"2",
         "name":"Ironman",
-        "img":"",
+        "img":"images/ironman.png",
         "attacks":[
             {
                 "attack_name":"Called out",
@@ -107,7 +107,7 @@
     {
         "id":"3",
         "name":"Elsa",
-        "img":"",
+        "img":"images/elsa.png",
         "attacks":[
             {
                 "attack_name":"Let it go",

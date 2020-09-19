@@ -42,15 +42,25 @@ class Game:
         with open('characters.json') as info:
             self.data = json.load(info)
 
+        self.img1 = pygame.image.load(str(self.data[int(player1_id)]['img']))
+        temp=self.data[int(player2_id)]['img']
+        self.img2=pygame.image.load(str(self.data[int(player2_id)]['img']))
+
         #set player1 images
-    def set_img(self,a):
-        rect = self.img.get_rect()
-        if(a==1):
+    def set_img(self,i): 
+        if(i==1):
             x=200
+            rect = self.img1.get_rect()
+            rect.center = x, 220
+            
+            self.screen.blit(self.img1, rect)
         else:
             x=600
-        rect.center = x, 250
-        self.screen.blit(self.img, rect)
+            rect = self.img2.get_rect()
+            rect.center = x, 220
+           
+            self.screen.blit(self.img2, rect)
+        
 
     #set bar at bottom for attack desc
     def info_bar(self,a):
@@ -68,13 +78,13 @@ class Game:
     #set health bar, width =240
     def health_bar(self,a):
         if(a==1):
-            center_x=60
+            center_x=63
             rect_margin=75
         else:
-            center_x=460
+            center_x=463
             rect_margin=475
-        write_text("hp", self.font_xs, (255,255,255), self.screen,center_x,40)
-        bar=pygame.Rect(rect_margin, 38, 250, 7)
+        write_text("hp", self.font_xs, (255,255,255), self.screen,center_x,53)
+        bar=pygame.Rect(rect_margin, 50, 250, 7)
         pygame.draw.rect(self.screen, (200, 200, 200),bar)
 
     def health_bar_update(self,a):
@@ -98,14 +108,16 @@ class Game:
         if(self.life1==0):
             print('player 2 wins')
             self.win=self.player1
-        bar=pygame.Rect(rect_margin, 39.5,width, 4.5)
+        bar=pygame.Rect(rect_margin, 51,width, 4.5)
         pygame.draw.rect(self.screen, (0, 255, 0),bar)
 
     #shows attack options
     def attack_bar(self):
         bar=pygame.Rect(0, 450, 10, 110)
         pygame.draw.rect(self.screen, (255, 255, 255),bar)
-
+        rect = self.img1.get_rect()
+        # rect.center = x, 220
+        # self.screen.blit(self.att_bg, bar)
         for i in range(4):
             if(i<2):
                 margin_left=80+(i*340)
@@ -130,13 +142,13 @@ class Game:
 
     #basic setup of player 1- name,healthbar and img
     def player1_char_set(self):
-        write_text(self.player1, self.font_sm, (255, 255, 255), self.screen, 200,20 )
+        write_text(self.player1, self.font_sm, (255, 255, 255), self.screen, 200,30 )
         self.health_bar(1)
         self.health_bar_update(1)
         self.set_img(1)
 
     def player2_char_set(self):
-        write_text(self.player2, self.font_sm, (255, 255, 255), self.screen, 600,20 )
+        write_text(self.player2, self.font_sm, (255, 255, 255), self.screen, 600,30 )
         self.health_bar(2)
         self.health_bar_update(2)
         self.set_img(2)
@@ -155,7 +167,7 @@ class Game:
         self.health_bar_update(1)
 
     #gameloop
-    def play(self):
+    def play_(self):
         running = True
         self.screen.blit(self.bg,(0,0))
         self.player1_char_set()
