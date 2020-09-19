@@ -122,7 +122,7 @@ class Map1(Map):
                  [20, 600, 760, 1, WHITE],
                  [20, 20, 205, 60, GREEN],
                  [20, 400, 90, 130, BLUE],
-                 [640, 20, 158, 80, BLUE],
+                 [640, 20, 158, 70, BLUE],
                  [20, 130, 35, 300, RED],
                  [40, 145, 90, 280, RED],
                  [120, 160, 90, 180, RED],
@@ -143,15 +143,7 @@ class Map1(Map):
             wall = Wall(item[0], item[1], item[2], item[3], item[4])
             self.wall_list.add(wall)
  
-
-'''class Training(Map1):
-    def __init__(self):
-        super().__init__()
-        def train(self,walls):
-            block_hit_list = pygame.sprite.spritecollide(self, walls, False)
-            for i in block_hit_list:
-                if i[4]==BLUE:
-                    print("Hello")'''        
+      
             
 def game_map():
     """ Main Program """
@@ -214,13 +206,13 @@ def game_map():
         
         player.move(current_room.wall_list)
  
-        if player.rect.x < 40:
+        if player.rect.x < 30:
             done=False
             print('hello')
             main_menu()
 
  
-        if player.rect.x > 700:
+        if player.rect.x > 770:
             done=False
             print("Bye")
             main_menu()
@@ -240,6 +232,6 @@ def game_map():
         clock.tick(60)
         
  
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+     main()
 
