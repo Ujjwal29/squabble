@@ -3,9 +3,11 @@ import sys
 import time
 import json
 from pygame.locals import *
-from game_map import game_map
+from game_map import Wall,Player,Map,Map1
 from write_text import write_text
 from wip import wip
+from game import Game
+
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -22,131 +24,8 @@ house3=pygame.image.load("images/house3.png")
 house3 = pygame.transform.scale(house3, (150, 100))
 char=pygame.image.load('images/volleyball.png')
 
-
-class Wall(pygame.sprite.Sprite):
-    """This class represents the bar at the bottom that the player controls """
- 
-    def __init__(self, x, y, width, height, color):
-        """ Constructor function """
- 
-        # Call the parent's constructor
-        super().__init__()
- 
-        # Make a BLUE wall, of the size specified in the parameters
-        self.image = pygame.Surface([width, height])
-        self.image.fill(color)
- 
-        # Make our top-left corner the passed-in location.
-        self.rect = self.image.get_rect()
-        self.rect.y = y
-        self.rect.x = x
- 
- 
-class Player(pygame.sprite.Sprite):
-    """ This class represents the bar at the bottom that the
-    player controls """
- 
-    # Set speed vector
-    change_x = 0
-    change_y = 0
- 
-    def __init__(self, x, y):
-        """ Constructor function """
- 
-        # Call the parent's constructor
-        super().__init__()
- 
-        # Set height, width
-        self.image = pygame.Surface([25, 25])
-
- 
-        # Make our top-left corner the passed-in location.
-        self.rect = self.image.get_rect()
-        self.rect.y = y
-        self.rect.x = x
-        self.image.blit(char,(x,y))
-    def changespeed(self, x, y):
-        """ Change the speed of the player. Called with a keypress. """
-        self.change_x += x
-        self.change_y += y
- 
-    def move(self, walls):
-        """ Find a new position for the player """
- 
-        # Move left/right
-        self.rect.x += self.change_x
- 
-        # Did this update cause us to hit a wall?
-        block_hit_list = pygame.sprite.spritecollide(self, walls, False)
-        for block in block_hit_list:
-            # If we are moving right, set our right side to the left side of
-            # the item we hit
-            if self.change_x > 0:
-                self.rect.right = block.rect.left
-            else:
-                # Otherwise if we are moving left, do the opposite.
-                self.rect.left = block.rect.right
- 
-        # Move up/down
-        self.rect.y += self.change_y
- 
-        # Check and see if we hit anything
-        block_hit_list = pygame.sprite.spritecollide(self, walls, False)
-        for block in block_hit_list:
-            # Reset our position based on the top/bottom of the object.
-           
-            if self.change_y < 0:
-                self.rect.top = block.rect.bottom
-        
-            else:
-                self.rect.bottom = block.rect.top         
-                
-
-class Map(object):
-    """ Base class for all rooms. """
- 
-    # Each room has a list of walls, and of enemy sprites.
-    wall_list = None
- 
-    def __init__(self):
-        """ Constructor, create our lists. """
-        self.wall_list = pygame.sprite.Group()
- 
- 
-class Map1(Map):
-    """This creates all the walls in room 1"""
-    def __init__(self):
-        super().__init__()
-        # Make the walls. (x_pos, y_pos, width, height)
- 
-        # This is a list of walls. Each is in the form [x, y, width, height]
-        walls = [[0, 0, 20, 530, WHITE],
-                 [800, 140, 1, 450, WHITE],
-                 [20, 0, 770, 20, WHITE],
-                 [20, 600, 760, 1, WHITE],
-                 [20, 20, 205, 60, GREEN],
-                 [20, 400, 90, 130, BLUE],
-                 [640, 20, 158, 80, BLUE],
-                 [20, 130, 35, 300, RED],
-                 [40, 145, 90, 280, RED],
-                 [120, 160, 90, 180, RED],
-                 [110, 350, 20, 180, RED],
-                 [100, 490, 250, 70, RED],
-                 [180, 20, 400, 70, RED],
-                 [240, 20, 380, 70, RED],
-                 [275, 100, 150, 225, RED],
-                 [200, 385, 490, 40, RED],
-                 [475, 220, 265, 120, RED],
-                 [410, 480, 370, 130, RED],
-                 [260, 20, 300, 150, RED],
-                 [650, 140, 145, 40, RED]
-                ]
- 
-        # Loop through the list. Create the wall, add it to the list
-        for item in walls:
-            wall = Wall(item[0], item[1], item[2], item[3], item[4])
-            self.wall_list.add(wall)
-           
+with open('characters.json') as info:
+    data = json.load(info)
 
 class Game_client:
 
@@ -161,6 +40,37 @@ class Game_client:
         self.font_info=pygame.font.SysFont(None,24)
         self.screen.fill((0,0,0))
         # self.game_map=game_map()
+        with open('characters.json') as info:
+            self.data = json.load(info)
+
+    
+    def start(self):
+        while True:
+            button=[]
+            btn=pygame.Rect(220, 200, 360, 50)
+            button.append(btn)
+            pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            write_text('Play against computer', self.font, (0, 0, 0), self.screen, 400, 225)
+            btn=pygame.Rect(220, 290, 360, 50)
+            button.append(btn)
+            pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            write_text('Play online (Multiplayer)', self.font, (0, 0, 0), self.screen, 400, 315)
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                mouse_pos = pygame.mouse.get_pos()
+                for i, rect in enumerate(button):
+                    if rect.collidepoint(mouse_pos):                  
+                        if event.type == MOUSEBUTTONDOWN:
+                            print("playy!!")
+                            running=False
+                            if(button.index(rect)==0):
+                                return 1
+            pygame.display.update()
+            self.mainClock.tick(60)
+
 
     def game_map(self):
         player = Player(100, 100)
@@ -211,11 +121,13 @@ class Game_client:
     
             if player.rect.x < 40:
                 done=False
-                print('hello')             
+                print('hello')
+                return 1             
     
             if player.rect.x > 700:
                 done=False
                 print("Bye")
+                return 1
             
             # --- Drawing ---
             self.screen.fill(BLACK)
@@ -229,17 +141,17 @@ class Game_client:
             
             clock.tick(60)
 
-    def start(self):
+    def main_menu(self):
         while True:
+            self.screen.fill((0,0,0))
+            write_text('Select a character to start playing!',self.font, (255, 255, 255),self.screen,400,50)
             button=[]
-            btn=pygame.Rect(220, 200, 360, 50)
-            button.append(btn)
-            pygame.draw.rect(self.screen, (255, 255, 255),btn)
-            write_text('Play against computer', self.font, (0, 0, 0), self.screen, 400, 225)
-            btn=pygame.Rect(220, 290, 360, 50)
-            button.append(btn)
-            pygame.draw.rect(self.screen, (255, 255, 255),btn)
-            write_text('Play online (Multiplayer)', self.font, (0, 0, 0), self.screen, 400, 315)
+            for i in range(len(data)):
+                btn=pygame.Rect(100, 100+(i*70), 600, 50)
+                button.append(btn)
+                pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            for i in range(len(data)):
+                write_text(data[i]['name'], self.font, (0, 0, 0), self.screen, 400,125+(i*70))
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -249,19 +161,116 @@ class Game_client:
                 for i, rect in enumerate(button):
                     if rect.collidepoint(mouse_pos):                  
                         if event.type == MOUSEBUTTONDOWN:
-                            print("playy!!")
+                            print(data[button.index(rect)]['name'],"selected!!")
+                            character=data[button.index(rect)]['name']
+                            character_id=data[button.index(rect)]['id']
                             running=False
-                            if(button.index(rect)==0):
-                                return 1
+                            print([character,character_id])
+                            return([character,character_id])
+                            # player2_id=randint(0,4)
+                            # player2=data[player2_id]['name']
+                            # game_obj=Game(character,character_id,player2,player2_id)
+                            # game_obj.play()
+
+            pygame.display.update()
+            self.mainClock.tick(60)
+
+    def play_game(self,players):
+        play=Game(players[0],players[1],players[2],players[3])
+        self.screen.blit(play.bg,(0,0))
+        # line=pygame.Rect(405,0, 1, 600)
+        # pygame.draw.rect(self.screen, (255, 255, 255),line)
+        bar=pygame.Rect(0, 440, 800, 160)
+        pygame.draw.rect(self.screen, (255, 255, 255),bar)
+        play.player1_char_set()
+        play.player2_char_set()
+        flag=0
+        msg=False
+        running=True
+        while running:
+            play.player1_play()
+            # self.player2(2)
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                temp=0
+                mouse_pos = pygame.mouse.get_pos()
+                for i, rect in enumerate(play.button):  
+                    if rect.collidepoint(mouse_pos):                
+                        if event.type == MOUSEBUTTONDOWN:
+                            flag=1
+                            play.attack=self.data[int(play.player1_id)]['attacks'][play.button.index(rect)]['attack_name']
+                            play.attack_damage=self.data[int(play.player1_id)]['attacks'][play.button.index(rect)]['attack_damage']
+                            play.attack_desc=self.data[int(play.player1_id)]['attacks'][play.button.index(rect)]['attack_desc']
+                            play.attack_message=self.data[int(play.player1_id)]['attacks'][play.button.index(rect)]['attack_message']
+
+                if(flag==1):
+                    play.update_player1()                   
+                    flag=2
+                    pygame.display.update()
+                    pygame.time.wait(2000)
+
+                if(flag==2):
+                    play.attack=self.data[int(play.player2_id)]['attacks'][0]['attack_name']
+                    play.attack_damage=self.data[int(play.player2_id)]['attacks'][0]['attack_damage']
+                    play.attack_desc=self.data[int(play.player2_id)]['attacks'][0]['attack_desc']
+                    play.attack_message=self.data[int(play.player2_id)]['attacks'][0]['attack_message']
+                    play.update_player2()
+                    flag=0
+
+                if(play.win):
+                    running=False
+                    return(play.win)
+                    # win(self.win)
+                    # print(self.won,'is the winner')
+                    break
+
+
+            pygame.display.update()
+            self.mainClock.tick(10)
+
+    def win(self,winner): 
+        while True:
+            self.screen.fill((0,0,0))
+            s=winner+" won!!"
+            write_text(s, self.font, (255, 255, 255), self.screen,400,200)
+            btn=pygame.Rect(260, 250, 270, 50)
+            pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            write_text('Play again', self.font, (0, 0, 0), self.screen, 400, 275)
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                mouse_pos = pygame.mouse.get_pos()
+                if btn.collidepoint(mouse_pos):                  
+                    if event.type == MOUSEBUTTONDOWN:
+                        print("continue")
+                        return(1)
+                        
             pygame.display.update()
             self.mainClock.tick(60)
 
     def game_loop(self):
         running=True
         x=0
+        self.start()
         while(running):
-            if(self.start()):
-                self.game_map()
+            self.game_map()
+            temp=[]
+            temp=self.main_menu()
+            temp.append('ironman')
+            temp.append('2')
+            print(temp)
+            winner=''
+            winner=self.play_game(temp)
+            if(self.win(winner)):
+                self.screen.fill((0,0,0))
+            else:
+                self.screen.fill((0,0,0))
+                pygame.quit()
+
 
 
 

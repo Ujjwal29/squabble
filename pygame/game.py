@@ -170,7 +170,7 @@ class Game:
         self.health_bar_update(1)
 
     #gameloop
-    def play(self):
+    def play_(self):
         running = True
         self.screen.blit(self.bg,(0,0))
         line=pygame.Rect(405,0, 1, 600)
