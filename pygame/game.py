@@ -17,8 +17,11 @@ class Game:
         self.font_sm=pygame.font.SysFont(None,30)
         self.font_xs=pygame.font.SysFont(None,16)
         self.font_info=pygame.font.SysFont(None,24)
-        self.img = pygame.image.load('player.png')
-
+        self.img = pygame.image.load('images/character/elsa.png')
+        self.bg= pygame.image.load('images/fight-bg.png')
+        self.msg=pygame.image.load('images/msgs.png')
+        self.att_button=pygame.image.load('images/button.png')
+        self.att_bg=pygame.image.load('images/button-bg.png')
         self.lose=''
         self.win=''
 
@@ -154,7 +157,7 @@ class Game:
     #gameloop
     def play(self):
         running = True
-        self.screen.fill((0,0,0))
+        self.screen.blit(self.bg,(0,0))
         line=pygame.Rect(405,0, 1, 600)
         pygame.draw.rect(self.screen, (255, 255, 255),line)
         bar=pygame.Rect(0, 440, 800, 160)
