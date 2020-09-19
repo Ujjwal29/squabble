@@ -7,6 +7,11 @@ while True:
     msg = s.recv(2048)
     if len(msg) <= 0:
         break
-    complete_info += msg.decode("utf-8")
+    mesg_received =  msg.decode("utf-8")
+    print(mesg_received)
+    mesgno = 0
+    while (mesgno<5):
+        newmesg = input("mesg? : ")
+        s.send(bytes(newmesg, "utf-8"))
+        mesgno += 1
 
-print(complete_info)

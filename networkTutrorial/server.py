@@ -8,7 +8,7 @@ port = 5555
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-server.bind((server_ad, port))
+server.bind((socket.gethostname(), 1024))
 
 server.listen(2)
 print("Waiting for a connection, Server Started")
