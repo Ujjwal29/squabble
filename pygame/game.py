@@ -5,6 +5,7 @@ import json
 from pygame.locals import *
 from write_text import write_text
 from win import win
+import pygame.gfxdraw
 
 class Game:
 
@@ -16,12 +17,11 @@ class Game:
         self.font = pygame.font.SysFont(None, 42)
         self.font_sm=pygame.font.SysFont(None,30)
         self.font_xs=pygame.font.SysFont(None,16)
-        self.font_info=pygame.font.SysFont(None,24)
+        self.font_info=pygame.font.SysFont(None,30)
         self.img = pygame.image.load('images/character/elsa.png')
-        self.bg= pygame.image.load('images/fight-bg.png')
+        self.bg= pygame.image.load('images/fight-bg2.png')        
+        self.bg = pygame.transform.scale(self.bg, (800, 600))
         self.msg=pygame.image.load('images/msgs.png')
-        self.att_button=pygame.image.load('images/button.png')
-        self.att_bg=pygame.image.load('images/button-bg.png')
         self.lose=''
         self.win=''
 
@@ -54,13 +54,13 @@ class Game:
 
     #set bar at bottom for attack desc
     def info_bar(self,a):
-        bar=pygame.Rect(0, 420, 800, 40)
-        pygame.draw.rect(self.screen, (200,200,200),bar)
+        bar=pygame.Rect(45, 380, 700, 35)
+        pygame.draw.rect(self.screen, (64,60,110),bar)
         if(a==1):
             temp=self.attack_desc
         else:
             temp=self.attack_message
-        write_text(temp, self.font_info, (0, 0, 0), self.screen, 400,435 )
+        write_text(temp, self.font_info, (225, 225, 225), self.screen, 400,395 )
         print(self.attack_message)
         # bar=pygame.Rect(0, 420, 800, 40)
         # pygame.draw.rect(self.screen, (200,200,200),bar)
@@ -103,7 +103,7 @@ class Game:
 
     #shows attack options
     def attack_bar(self):
-        bar=pygame.Rect(0, 450, 800, 150)
+        bar=pygame.Rect(0, 450, 10, 110)
         pygame.draw.rect(self.screen, (255, 255, 255),bar)
 
         for i in range(4):
@@ -115,7 +115,7 @@ class Game:
                 margin_top=525
             btn=pygame.Rect(margin_left,margin_top, 310, 50)
             self.button.append(btn)
-            pygame.draw.rect(self.screen, (0, 0, 0),btn)
+            pygame.draw.rect(self.screen, (39, 39, 39),btn)
             
 
         for i in range(4):
@@ -158,10 +158,6 @@ class Game:
     def play(self):
         running = True
         self.screen.blit(self.bg,(0,0))
-        line=pygame.Rect(405,0, 1, 600)
-        pygame.draw.rect(self.screen, (255, 255, 255),line)
-        bar=pygame.Rect(0, 440, 800, 160)
-        pygame.draw.rect(self.screen, (255, 255, 255),bar)
         self.player1_char_set()
         self.player2_char_set()
         flag=0
