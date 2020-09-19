@@ -4,6 +4,7 @@ import time
 import json
 from pygame.locals import *
 from write_text import write_text
+from win import win
 
 # mainClock = pygame.time.Clock()
 
@@ -175,10 +176,14 @@ class Game:
         self.font_xs=pygame.font.SysFont(None,16)
         self.font_info=pygame.font.SysFont(None,24)
         self.img = pygame.image.load('player.png')
-        self.lose=False
+
+        self.lose=''
+        self.win=''
+
         self.player1=player1
         self.player1_id=player1_id
         self.player2=player2
+        self.player2_id=player2_id
         self.life1=240
         self.life2=240
         self.button=[]
@@ -204,7 +209,7 @@ class Game:
 
     #set bar at bottom for attack desc
     def info_bar(self):
-        bar=pygame.Rect(0, 420, 800, 40)
+        bar=pygame.Rect(0, 420, 800, 50)
         pygame.draw.rect(self.screen, (200,200,200),bar)
         write_text(self.attack_desc, self.font_info, (0, 0, 0), self.screen, 400,435 )
         print(self.attack_message)
@@ -227,14 +232,27 @@ class Game:
         self.health_bar(a)
         if(a==1):
             rect_margin=78
+            self.life2-=((int(self.attack_damage))*240)/100
+            if(self.life2<0):
+                self.life2=0
+            width=self.life2
         else:
             rect_margin=478
-        self.life2-=((int(self.attack_damage))*240)/100
-        if(self.life2<0):
-            self.life2=0
-        bar=pygame.Rect(rect_margin, 39.5,self.life2, 4.5)
+            self.life1-=((int(self.attack_damage))*240)/100
+            if(self.life1<0):
+                self.life1=0
+            width=self.life1
+        
+        if(self.life2==0):
+            print('player 1 wins!')
+            self.lose=self.player2
+            self.win=self.player1
+        if(self.life1==0):
+            print('player 2 wins')
+            self.lose=self.player1
+            self.win=self.player2
+        bar=pygame.Rect(rect_margin, 39.5,width, 4.5)
         pygame.draw.rect(self.screen, (0, 255, 0),bar)
-        print(self.life2)
 
     #shows attack options
     def attack_bar(self):
@@ -279,12 +297,15 @@ class Game:
     #game play of player1. choose attacks and shit
     def player1_play(self):
         self.attack_bar()
-        
-        # self.health_bar_update(2)
+
 
     def update_player1(self):
         self.info_bar()
         self.health_bar_update(2)
+
+    def update_player2(self):
+        self.info_bar()
+        self.health_bar_update(1)
 
     #gameloop
     def play(self):
@@ -297,6 +318,7 @@ class Game:
         self.player1_char_set()
         self.player2_char_set()
         flag=0
+        msg=False
         while running:
             self.player1_play()
             # self.player2(2)
@@ -317,9 +339,26 @@ class Game:
                             self.attack_damage=self.data[int(self.player1_id)]['attacks'][self.button.index(rect)]['attack_damage']
                             self.attack_desc=self.data[int(self.player1_id)]['attacks'][self.button.index(rect)]['attack_desc']
                             self.attack_message=self.data[int(self.player1_id)]['attacks'][self.button.index(rect)]['attack_message']
+
                 if(flag==1):
-                    self.update_player1()
+                    self.update_player1()                   
+                    flag=2
+                    pygame.display.update()
+                    pygame.time.wait(5000)
+
+                if(flag==2):
+                    self.attack=self.data[int(self.player2_id)]['attacks'][0]['attack_name']
+                    self.attack_damage=self.data[int(self.player2_id)]['attacks'][0]['attack_damage']
+                    self.attack_desc=self.data[int(self.player2_id)]['attacks'][0]['attack_desc']
+                    self.attack_message=self.data[int(self.player2_id)]['attacks'][0]['attack_message']
+                    self.update_player2()
                     flag=0
 
-                pygame.display.update()
-            self.mainClock.tick(120)
+                if(self.win or self.lose):
+                    # win(self.win,self.lose)
+                    print(self.won,'is the winner')
+                    break
+
+
+            pygame.display.update()
+            self.mainClock.tick(10)

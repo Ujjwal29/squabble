@@ -20,7 +20,7 @@ with open('characters.json') as info:
 def main_menu():
     while True:
         screen.fill((0,0,0))
-        write_text('Select a character', font, (255, 255, 255), screen,400,400)
+        write_text('Select a character to start playing!', font, (255, 255, 255), screen,400,50)
         button=[]
         for i in range(len(data)):
             btn=pygame.Rect(100, 100+(i*70), 600, 50)
