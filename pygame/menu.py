@@ -44,7 +44,7 @@ def main_menu():
                         print(data[button.index(rect)]['name'],"selected!!")
                         character=data[button.index(rect)]['name']
                         character_id=data[button.index(rect)]['id']
-                        game_obj=Game(character,character_id,"mario",2)
+                        game_obj=Game(character,character_id,"Ironman",2)
                         game_obj.play()
 
         pygame.display.update()
