@@ -18,7 +18,7 @@ class Game:
         self.font_sm=pygame.font.SysFont(None,30)
         self.font_xs=pygame.font.SysFont(None,16)
         self.font_info=pygame.font.SysFont(None,30)
-        self.img = pygame.image.load('images/character/elsa.png')
+        self.img = pygame.image.load('images/elsa.png')
         self.bg= pygame.image.load('images/fight-bg2.png')        
         self.bg = pygame.transform.scale(self.bg, (800, 600))
         self.msg=pygame.image.load('images/msgs.png')

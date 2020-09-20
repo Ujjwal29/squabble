@@ -33,8 +33,8 @@ def win(winner):
                 if event.type == MOUSEBUTTONDOWN:
                     print("click")
                     pygame.quit()
-                    from game_map import main
-                    main()
+                    from game_map import game_map
+                    game_map()
                     
 
         pygame.display.update()

@@ -3,7 +3,6 @@ import sys
 import time
 import json
 from pygame.locals import *
-from game_map import main
 from write_text import write_text
 from wip import wip
 
@@ -38,10 +37,12 @@ def start():
                     if event.type == MOUSEBUTTONDOWN:
                         print("playy!!")
                         running=False
+                        
+                        from game_map import game_map
                         if(button.index(rect)==0):
-                            main()
+                            game_map()
                         else:
-                            main()
+                            game_map()
         pygame.display.update()
         mainClock.tick(60)
 

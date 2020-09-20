@@ -46,7 +46,7 @@ def main_menu():
                         player2_id=randint(0,4)
                         player2=data[player2_id]['name']
                         game_obj=Game(character,character_id,player2,player2_id)
-                        game_obj.play()
+                        game_obj.play_()
 
         pygame.display.update()
         mainClock.tick(60)
