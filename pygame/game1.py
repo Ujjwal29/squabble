@@ -31,6 +31,8 @@ continuehom=pygame.image.load("images/continue-bg.png")
 continuehom = pygame.transform.scale(continuehom, (800, 600))
 bg= pygame.image.load('images/fight-bg2.png')        
 bg = pygame.transform.scale(bg, (800, 600))
+multi= pygame.image.load("images/multipl.png")
+multi = pygame.transform.scale(multi, (800, 600))
 
 with open('characters.json') as info:
     data = json.load(info)
@@ -265,25 +267,46 @@ class Game_client:
             pygame.display.update()
             self.mainClock.tick(60)
 
+
+    def wip(self):
+        while True:
+            self.screen.blit(multi,(0,0))
+            s="We are still working on this."
+            q="Try playing the game locally!!"
+            write_text(s, self.font_sm, (255, 255, 255), self.screen,400,240)
+            write_text(q, self.font_sm, (255, 255, 255), self.screen,400,270)
+            btn=pygame.Rect(260, 375, 270, 50)
+            pygame.draw.rect(self.screen, (255, 255, 255),btn)
+            write_text('Continue', self.font, (0, 0, 0), self.screen, 400, 400)
+
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    pygame.quit()
+                    sys.exit()
+                mouse_pos = pygame.mouse.get_pos()
+                if btn.collidepoint(mouse_pos):                  
+                    if event.type == MOUSEBUTTONDOWN:
+                        print("continue locally")
+                        return 1
+            pygame.display.update()
+            self.mainClock.tick(60)
+
     def game_loop(self):
         running=True
         x=''
         x=self.start()
-        while(running):
-            self.game_map()
+        while(running):            
             if(x=='local'):
-                temp=[]
-                temp=self.main_menu()
-                player2_id=randint(0,6)
-                player2=data[player2_id]['name']
-                temp.append(player2)
-                temp.append(player2_id)
+                self.game_map()   
             else:
+                self.wip()
                 self.game_map()
-                temp=[]
-                temp=self.main_menu()
-                temp.append('ironman')
-                temp.append('2')
+            temp=[]
+            temp=self.main_menu()
+            player2_id=randint(0,6)
+            player2=data[player2_id]['name']
+            temp.append(player2)
+            temp.append(player2_id)
             print(temp)
             winner=''
             winner=self.play_game(temp)
