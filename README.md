@@ -11,8 +11,7 @@ A game where you can test your super heroes with more random ones :)
 > use python3 for the project
 
 ```shell
-$ cd 
-$ brew install fvcproductions
+$ pip install pygame
 ```
 
 ```python
