@@ -3,7 +3,6 @@ import sys
 import time
 import json
 from pygame.locals import *
-from game_map import main
 from write_text import write_text
 from wip import wip
 
@@ -12,20 +11,21 @@ mainClock = pygame.time.Clock()
 pygame.init()
 pygame.display.set_caption('Squabble')
 screen = pygame.display.set_mode((800, 600),0,32)
-font = pygame.font.SysFont(None, 42)
-
+font = pygame.font.SysFont(None, 30)
+homescreen=pygame.image.load("images/mainmenu.png")
+homescreen = pygame.transform.scale(homescreen, (800, 600))
 def start():
     while True:
-        screen.fill((0,0,0))
+        screen.blit(homescreen,(0,0))
         button=[]
-        btn=pygame.Rect(220, 200, 360, 50)
+        btn=pygame.Rect(250, 250, 270, 45)
+        button.append(btn)
+        pygame.draw.rect(screen, (255, 255, 255,),btn)
+        write_text('Play against computer', font, (0, 0, 0), screen, 390, 275)
+        btn=pygame.Rect(290, 380, 270, 45)
         button.append(btn)
         pygame.draw.rect(screen, (255, 255, 255),btn)
-        write_text('Play against computer', font, (0, 0, 0), screen, 400, 225)
-        btn=pygame.Rect(220, 290, 360, 50)
-        button.append(btn)
-        pygame.draw.rect(screen, (255, 255, 255),btn)
-        write_text('Play online (Multiplayer)', font, (0, 0, 0), screen, 400, 315)
+        write_text('Play online (Multiplayer)', font, (0, 0, 0), screen, 420, 405)
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -37,11 +37,12 @@ def start():
                     if event.type == MOUSEBUTTONDOWN:
                         print("playy!!")
                         running=False
+                        
+                        from game_map import game_map
                         if(button.index(rect)==0):
-                            main()
+                            game_map()
                         else:
-                            wip()
-
+                            game_map()
         pygame.display.update()
         mainClock.tick(60)
 

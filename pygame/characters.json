@@ -2,7 +2,7 @@
     {
         "id":"0",
         "name":"Scooby and Shaggy",
-        "img":"",
+        "img":"images/character/scooby.png",
         "attacks":[
             {
                 "attack_name":"Zoinks",
@@ -37,7 +37,7 @@
     {
         "id":"1",
         "name":"Joker",
-        "img":"",
+        "img":"images/character/joker.png",
         "attacks":[
             {
                 "attack_name":"HAHAHA",
@@ -72,20 +72,20 @@
     {
         "id":"2",
         "name":"Ironman",
-        "img":"",
+        "img":"images/character/ironman.png",
         "attacks":[
             {
                 "attack_name":"Called out",
                 "attack_desc":"Call out the opponent for playing galaga",
                 "attack_damage":"10",
-                "attack_message":"You just got called out for playing galaga at work, losing 10hp",
+                "attack_message":"You just got called out for playing galaga at work",
                 "attack_cooldown":"1"
             },
             {
                 "attack_name":"Jarvis attack",
                 "attack_desc":"Jarvis exposes the opponents weakness",
                 "attack_damage":"30",
-                "attack_message":"Jarvis analyzed your weaknesses, making the attack more powerful. You lost 30hp.",
+                "attack_message":"Jarvis analyzed your weaknesses, making the attack more powerful.",
                 "attack_cooldown":"2"
             },
             {
@@ -107,7 +107,7 @@
     {
         "id":"3",
         "name":"Elsa",
-        "img":"",
+        "img":"images/character/elsa.png",
         "attacks":[
             {
                 "attack_name":"Let it go",
@@ -134,43 +134,113 @@
                 "attack_name":"Truth attack",
                 "attack_desc":"Force opponent to listen to the fact that you can't marry someone after knowing them for a day.",
                 "attack_damage":"10",
-                "attack_message":"You got a lecture about how you can't marry said man after knowing him for a day,losing 10hp",
+                "attack_message":"You got a lecture about how you can't marry said man after knowing him for a day",
                 "attack_cooldown":"1"
             }            
         ]
     },
     {
         "id":"4",
-        "name":"Team Rocket",
-        "img":"",
+        "name":"Groot",
+        "img":"images/character/groot.png",
         "attacks":[
             {
-                "attack_name":"",
-                "attack_desc":"",
-                "attack_damage":"",
-                "attack_message":"",
+                "attack_name":"I am groot",
+                "attack_desc":"I am groot",
+                "attack_damage":"20",
+                "attack_message":"I am groot",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"I am groot",
+                "attack_desc":"I am groot",
+                "attack_damage":"10",
+                "attack_message":"I am groot",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"I am groot",
+                "attack_desc":"I am groot",
+                "attack_damage":"30",
+                "attack_message":"I am groot",
+                "attack_cooldown":"2"
+            },
+            {
+                "attack_name":"I am groot",
+                "attack_desc":"I am groot",
+                "attack_damage":"20",
+                "attack_message":"I am groot",
+                "attack_cooldown":"3"
+            }            
+        ]
+    },
+    {
+        "id":"5",
+        "name":"Thanos",
+        "img":"images/character/thanos.png",
+        "attacks":[
+            {
+                "attack_name":"Snap",
+                "attack_desc":"Thanos tries to snap opponent, only to have it reversed",
+                "attack_damage":"0",
+                "attack_message":"Thanos tried to snap you,but it didn't work",
                 "attack_cooldown":""
             },
             {
-                "attack_name":"",
-                "attack_desc":"",
-                "attack_damage":"",
-                "attack_message":"",
+                "attack_name":"I don't even know you",
+                "attack_desc":"Hurt your opponents ego by not aknowledging them",
+                "attack_damage":"30",
+                "attack_message":"You just got seen zone by Thanos",
                 "attack_cooldown":""
             },
             {
-                "attack_name":"",
-                "attack_desc":"",
-                "attack_damage":"",
-                "attack_message":"",
+                "attack_name":"I am inevitable",
+                "attack_desc":"Attack the opponents love for Ironman by remembering he died",
+                "attack_damage":"20",
+                "attack_message":"You just got hit with the 'i am inevitable' moment",
                 "attack_cooldown":""
             },
             {
-                "attack_name":"",
-                "attack_desc":"",
-                "attack_damage":"",
-                "attack_message":"",
+                "attack_name":"Balanced",
+                "attack_desc":"Everything should be equally balanced,so you didn't attack",
+                "attack_damage":"0",
+                "attack_message":"Equally balanced, like all things should be",
                 "attack_cooldown":""
+            }            
+        ]
+    },
+    {
+        "id":"6",
+        "name":"Phineas and Ferb",
+        "img":"images/character/phineas.png",
+        "attacks":[
+            {
+                "attack_name":"104",
+                "attack_desc":"Opponent loses 104 days of summer",
+                "attack_damage":"10",
+                "attack_message":"You just lost 104 days of summer",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Caught",
+                "attack_desc":"Candace calls mom on your opponent",
+                "attack_damage":"10",
+                "attack_message":"Candace finally gets validation, as her mom shouts at you",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Perry",
+                "attack_desc":"Platypus perry helps you attack the opponent",
+                "attack_damage":"20",
+                "attack_message":"You just got attacked by Agent Perry",
+                "attack_cooldown":"1"
+            },
+            {
+                "attack_name":"Some-weird-Inator",
+                "attack_desc":"Opponent gets blasted by Doofenshmirtz's inventions",
+                "attack_damage":"30",
+                "attack_message":"You just got blasted by some-weird-Inator",
+                "attack_cooldown":"1"
             }            
         ]
     }
