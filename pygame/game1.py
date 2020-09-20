@@ -7,7 +7,7 @@ from game_map import Wall,Player,Map,Map1
 from write_text import write_text
 from wip import wip
 from game import Game
-
+from random import randint
 
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
@@ -15,6 +15,8 @@ BLUE = (0, 0, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 PURPLE = (255, 0, 255)
+startmenu=pygame.image.load("images/startmenu.jpg")
+startmenu = pygame.transform.scale(startmenu, (800, 600))
 background=pygame.image.load("images/map-bg.png")
 house1=pygame.image.load("images/house1.png")
 house1 = pygame.transform.scale(house1, (180, 100))
@@ -23,6 +25,12 @@ house2 = pygame.transform.scale(house2, (100, 164))
 house3=pygame.image.load("images/house3.png")
 house3 = pygame.transform.scale(house3, (150, 100))
 char=pygame.image.load('images/volleyball.png')
+homescreen=pygame.image.load("images/mainmenu.png")
+homescreen = pygame.transform.scale(homescreen, (800, 600))
+continuehom=pygame.image.load("images/continue-bg.png")
+continuehom = pygame.transform.scale(continuehom, (800, 600))
+bg= pygame.image.load('images/fight-bg2.png')        
+bg = pygame.transform.scale(bg, (800, 600))
 
 with open('characters.json') as info:
     data = json.load(info)
@@ -47,14 +55,15 @@ class Game_client:
     def start(self):
         while True:
             button=[]
-            btn=pygame.Rect(220, 200, 360, 50)
+            self.screen.blit(homescreen,(0,0))
+            btn=pygame.Rect(250, 250, 270, 45)
             button.append(btn)
             pygame.draw.rect(self.screen, (255, 255, 255),btn)
-            write_text('Play against computer', self.font, (0, 0, 0), self.screen, 400, 225)
-            btn=pygame.Rect(220, 290, 360, 50)
+            write_text('Play against computer', self.font_sm, (0, 0, 0), self.screen, 390, 275)
+            btn=pygame.Rect(290, 380, 270, 45)
             button.append(btn)
             pygame.draw.rect(self.screen, (255, 255, 255),btn)
-            write_text('Play online (Multiplayer)', self.font, (0, 0, 0), self.screen, 400, 315)
+            write_text('Play online (Multiplayer)', self.font_sm, (0, 0, 0), self.screen,420, 405)
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -67,7 +76,9 @@ class Game_client:
                             print("playy!!")
                             running=False
                             if(button.index(rect)==0):
-                                return 1
+                                return "local"
+                            else:
+                                return "online"
             pygame.display.update()
             self.mainClock.tick(60)
 
@@ -180,8 +191,8 @@ class Game_client:
         self.screen.blit(play.bg,(0,0))
         # line=pygame.Rect(405,0, 1, 600)
         # pygame.draw.rect(self.screen, (255, 255, 255),line)
-        bar=pygame.Rect(0, 440, 800, 160)
-        pygame.draw.rect(self.screen, (255, 255, 255),bar)
+        # bar=pygame.Rect(0, 440, 800, 160)
+        # pygame.draw.rect(self.screen, (255, 255, 255),bar)
         play.player1_char_set()
         play.player2_char_set()
         flag=0
@@ -212,10 +223,11 @@ class Game_client:
                     pygame.time.wait(2000)
 
                 if(flag==2):
-                    play.attack=self.data[int(play.player2_id)]['attacks'][0]['attack_name']
-                    play.attack_damage=self.data[int(play.player2_id)]['attacks'][0]['attack_damage']
-                    play.attack_desc=self.data[int(play.player2_id)]['attacks'][0]['attack_desc']
-                    play.attack_message=self.data[int(play.player2_id)]['attacks'][0]['attack_message']
+                    r=randint(0,3)
+                    play.attack=self.data[int(play.player2_id)]['attacks'][r]['attack_name']
+                    play.attack_damage=self.data[int(play.player2_id)]['attacks'][r]['attack_damage']
+                    play.attack_desc=self.data[int(play.player2_id)]['attacks'][r]['attack_desc']
+                    play.attack_message=self.data[int(play.player2_id)]['attacks'][r]['attack_message']
                     play.update_player2()
                     flag=0
 
@@ -233,11 +245,12 @@ class Game_client:
     def win(self,winner): 
         while True:
             self.screen.fill((0,0,0))
+            self.screen.blit(continuehom,(0,0))
             s=winner+" won!!"
-            write_text(s, self.font, (255, 255, 255), self.screen,400,200)
-            btn=pygame.Rect(260, 250, 270, 50)
-            pygame.draw.rect(self.screen, (255, 255, 255),btn)
-            write_text('Play again', self.font, (0, 0, 0), self.screen, 400, 275)
+            write_text(s, self.font, (255, 255, 255), self.screen,390,165)
+            btn=pygame.Rect(263, 360, 270, 90)
+            pygame.draw.rect(self.screen, (235,205,84),btn)
+            write_text('Play again', self.font, (0, 0, 0), self.screen, 400, 406)
 
             for event in pygame.event.get():
                 if event.type == QUIT:
@@ -254,14 +267,23 @@ class Game_client:
 
     def game_loop(self):
         running=True
-        x=0
-        self.start()
+        x=''
+        x=self.start()
         while(running):
             self.game_map()
-            temp=[]
-            temp=self.main_menu()
-            temp.append('ironman')
-            temp.append('2')
+            if(x=='local'):
+                temp=[]
+                temp=self.main_menu()
+                player2_id=randint(0,6)
+                player2=data[player2_id]['name']
+                temp.append(player2)
+                temp.append(player2_id)
+            else:
+                self.game_map()
+                temp=[]
+                temp=self.main_menu()
+                temp.append('ironman')
+                temp.append('2')
             print(temp)
             winner=''
             winner=self.play_game(temp)
@@ -270,6 +292,7 @@ class Game_client:
             else:
                 self.screen.fill((0,0,0))
                 pygame.quit()
+                sys.exit()
 
 
 

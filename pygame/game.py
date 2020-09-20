@@ -51,13 +51,13 @@ class Game:
         if(i==1):
             x=200
             rect = self.img1.get_rect()
-            rect.center = x, 220
+            rect.center = x, 203
             
             self.screen.blit(self.img1, rect)
         else:
             x=600
             rect = self.img2.get_rect()
-            rect.center = x, 220
+            rect.center = x, 203
            
             self.screen.blit(self.img2, rect)
         
@@ -68,9 +68,11 @@ class Game:
         pygame.draw.rect(self.screen, (64,60,110),bar)
         if(a==1):
             temp=self.attack_desc
+            c=(145,209,139)
         else:
             temp=self.attack_message
-        write_text(temp, self.font_info, (225, 225, 225), self.screen, 400,395 )
+            c=(245,106,121)
+        write_text(temp, self.font_info, c, self.screen, 400,395 )
         print(self.attack_message)
         # bar=pygame.Rect(0, 420, 800, 40)
         # pygame.draw.rect(self.screen, (200,200,200),bar)
@@ -85,7 +87,7 @@ class Game:
             rect_margin=475
         write_text("hp", self.font_xs, (255,255,255), self.screen,center_x,53)
         bar=pygame.Rect(rect_margin, 50, 250, 7)
-        pygame.draw.rect(self.screen, (200, 200, 200),bar)
+        pygame.draw.rect(self.screen, (230, 230, 230),bar)
 
     def health_bar_update(self,a):
         self.health_bar(a)
@@ -109,7 +111,7 @@ class Game:
             print('player 2 wins')
             self.win=self.player1
         bar=pygame.Rect(rect_margin, 51,width, 4.5)
-        pygame.draw.rect(self.screen, (0, 255, 0),bar)
+        pygame.draw.rect(self.screen, (0,255,0),bar)
 
     #shows attack options
     def attack_bar(self):
