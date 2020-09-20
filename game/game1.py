@@ -157,6 +157,7 @@ class Game_client:
     def main_menu(self):
         while True:
             self.screen.fill((0,0,0))
+            self.screen.blit(startmenu,(0,0))
             write_text('Select a character to start playing!',self.font, (255, 255, 255),self.screen,400,50)
             button=[]
             for i in range(len(data)):
@@ -272,7 +273,7 @@ class Game_client:
         while True:
             self.screen.blit(multi,(0,0))
             s="We are still working on this."
-            q="Try playing the game locally!!"
+            q="Try playing the game locally :)"
             write_text(s, self.font_sm, (255, 255, 255), self.screen,400,240)
             write_text(q, self.font_sm, (255, 255, 255), self.screen,400,270)
             btn=pygame.Rect(260, 375, 270, 50)
